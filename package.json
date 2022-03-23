@@ -1,0 +1,27 @@
+{
+  "name": "neo-pets",
+  "version": "1.0.0",
+  "description": "A pet-centric social media platform for pet owners to post photos, comment, and share and review pet-related activities. Owners can also vote for their favorites!",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shawnmwillard/neo-pets.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shawnmwillard/neo-pets/issues"
+  },
+  "homepage": "https://github.com/shawnmwillard/neo-pets#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.17.0"
+  }
+}
