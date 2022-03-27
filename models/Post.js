@@ -11,7 +11,7 @@ Post.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    title: {
+    Text: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -21,6 +21,16 @@ Post.init(
         model: "user",
         key: "id",
       },
+    },
+    isContest: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    image: {
+      type: DataTypes.BLOB,
+    },
+    place: {
+      type: DataTypes.STRING,
     },
   },
   {
