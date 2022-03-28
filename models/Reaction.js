@@ -1,22 +1,15 @@
-
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
+const { truncate } = require("./user");
 
-class Comment extends Model {}
+class Reaction extends Model {}
 
-Comment.init(
+Reaction.init(
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
-    },
-    comment_text: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      validate: {
-        len: [1],
-      },
     },
     user_id: {
       type: DataTypes.INTEGER,
@@ -34,13 +27,21 @@ Comment.init(
         key: "id",
       },
     },
+    type_reaction: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "reactionsetup",
+        key: "id",
+      },
+    },
   },
   {
     sequelize,
+    timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "comment",
+    modelName: "reaction",
   }
 );
-
-module.exports = Comment;
+module.exports = Reaction;
