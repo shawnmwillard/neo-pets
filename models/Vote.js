@@ -1,3 +1,4 @@
+
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 const { truncate } = require("./user");
@@ -5,6 +6,7 @@ const { truncate } = require("./user");
 class Vote extends Model {}
 
 Vote.init(
+
   {
     id: {
       type: DataTypes.INTEGER,
