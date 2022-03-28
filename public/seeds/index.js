@@ -5,6 +5,7 @@ const seedAnimal = require("./animalData");
 const seedBreed = require("./breedData");
 const seedPet = require("./petData");
 const seedPost = require("./postData");
+const seedreactionSetupData = require("./reactionSetupData");
 
 const seedAll = async () => {
   await sequelize.sync({ force: true });
@@ -18,6 +19,8 @@ const seedAll = async () => {
   await seedPet();
 
   await seedPost();
+
+  await seedreactionSetupData();
 
   process.exit(0);
 };

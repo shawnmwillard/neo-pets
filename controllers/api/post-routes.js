@@ -1,14 +1,27 @@
 const router = require("express").Router();
-const { Post, User } = require("../../models");
+const { Post, User, Reaction } = require("../../models");
+const sequelize = require("../../config/connection");
 
 router.get("/", (req, res) => {
   Post.findAll({
-    attributes: ["id", "text", "user_id", "place", "created_at"],
+    attributes: [
+      "id",
+      "text",
+      "user_id",
+      "place",
+      "created_at",
+      [
+        sequelize.literal(
+          "(SELECT COUNT(*) FROM reaction WHERE post.id = reaction.post_id)"
+        ),
+        "reaction_count",
+      ],
+    ],
     order: [["created_at", "DESC"]],
     include: [
       {
         model: User,
-        attributes: ["username"],
+        attributes: ["first_name", "last_name"],
       },
     ],
   })
@@ -24,11 +37,23 @@ router.get("/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
-    attributes: ["id", "text", "user_id", "place", "created_at"],
+    attributes: [
+      "id",
+      "text",
+      "user_id",
+      "place",
+      "created_at",
+      [
+        sequelize.literal(
+          "(SELECT COUNT(*) FROM reaction WHERE post.id = reaction.post_id)"
+        ),
+        "reaction_count",
+      ],
+    ],
     include: [
       {
         model: User,
-        attributes: ["username"],
+        attributes: ["first_name", "last_name"],
       },
     ],
   })
@@ -56,6 +81,16 @@ router.post("/", (req, res) => {
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
+    });
+});
+
+//reaction
+router.put("/upreaction", (req, res) => {
+  Post.upvote(req.body, { Reaction })
+    .then((updatedPostData) => res.json(updatedPostData))
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json(err);
     });
 });
 
@@ -102,4 +137,5 @@ router.delete("/:id", (req, res) => {
       res.status(500).json(err);
     });
 });
+
 module.exports = router;

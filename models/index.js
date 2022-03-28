@@ -5,6 +5,8 @@ const Pet = require("./Pet");
 const Post = require("./Post");
 const Comment = require("./Comment");
 const Vote = require("./Vote");
+const Reaction = require("./Reaction");
+const Reactionsetup = require("./Reactionsetup");
 
 Animal.hasMany(Breed, {
   foreignKey: "animal_id",
@@ -33,4 +35,34 @@ User.hasMany(Post, {
 Post.belongsTo(User, {
   foreignKey: "user_id",
 });
-module.exports = { User, Animal, Breed, Pet, Post };
+
+Reaction.belongsTo(User, {
+  foreignKey: "user_id",
+});
+
+Reaction.belongsTo(Post, {
+  foreignKey: "post_id",
+});
+
+User.hasMany(Reaction, {
+  foreignKey: "user_id",
+});
+
+Post.hasMany(Reaction, {
+  foreignKey: "post_id",
+});
+
+User.belongsToMany(Post, {
+  through: Reaction,
+  as: "reaction_posts",
+  foreignKey: "user_id",
+});
+
+Post.belongsToMany(User, {
+  through: Reaction,
+  as: "reaction_posts",
+  foreignKey: "post_id",
+});
+
+//add reaction setup
+module.exports = { User, Animal, Breed, Pet, Post, Reaction, Reactionsetup };
