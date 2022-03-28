@@ -64,5 +64,30 @@ Post.belongsToMany(User, {
   foreignKey: "post_id",
 });
 
+Comment.belongsTo(User, {
+  foreignKey: "user_id",
+});
+
+Comment.belongsTo(Post, {
+  foreignKey: "post_id",
+});
+
+User.hasMany(Comment, {
+  foreignKey: "user_id",
+});
+
+Post.hasMany(Comment, {
+  foreignKey: "post_id",
+});
+
 //add reaction setup
-module.exports = { User, Animal, Breed, Pet, Post, Reaction, Reactionsetup };
+module.exports = {
+  User,
+  Animal,
+  Breed,
+  Pet,
+  Post,
+  Reaction,
+  Reactionsetup,
+  Comment,
+};
