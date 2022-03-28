@@ -29,119 +29,96 @@ router.get("/", (req, res) => {
     });
 });
 
-// router.get("/:id", (req, res) => {
-//   Post.findOne({
-//     where: {
-//       id: req.params.id,
-//     },
-//     attributes: [
-//       "id",
-//       "text",
-//       "user_id",
-//       "place",
-//       "created_at",
-//       [
-//         sequelize.literal(
-//           "(SELECT COUNT(*) FROM reaction WHERE post.id = reaction.post_id)"
-//         ),
-//         "reaction_count",
-//       ],
-//     ],
+router.get("/:id", (req, res) => {
+  Pet.findOne({
+    where: {
+      id: req.params.id,
+    },
+    attributes: ["id", "name", "user_id", "type_pet"],
+    include: [
+      {
+        model: Breed,
+        attributes: ["id", "description"],
+        include: {
+          model: Animal,
+          attributes: ["id", "description"],
+        },
+      },
+      {
+        model: User,
+        attributes: ["username", "first_name", "last_name"],
+      },
+    ],
+  })
+    .then((dbPetData) => {
+      if (!dbPetData) {
+        res.status(404).json({ message: "Neo-Pet found a pet with this id" });
+        return;
+      }
+      res.json(dbPetData);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 
-//     include: [
-//       {
-//         model: Comment,
-//         attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
-//         include: {
-//           model: User,
-//           attributes: ["username", "first_name", "last_name"],
-//         },
-//       },
-//       {
-//         model: User,
-//         attributes: ["username", "first_name", "last_name"],
-//       },
-//     ],
-//   })
-//     .then((dbPostData) => {
-//       if (!dbPostData) {
-//         res.status(404).json({ message: "Neo-Pet found a post with this id" });
-//         return;
-//       }
-//       res.json(dbPostData);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       res.status(500).json(err);
-//     });
-// });
+router.post("/", (req, res) => {
+  Pet.create({
+    name: req.body.name,
+    user_id: req.body.user_id,
+    type_pet: req.body.type_pet,
+  })
+    .then((dbPetData) => res.json(dbPetData))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 
-// router.post("/", (req, res) => {
-//   Post.create({
-//     text: req.body.text,
-//     user_id: req.body.user_id,
-//     is_contest: req.body.is_contest,
-//     place: req.body.place,
-//   })
-//     .then((dbPostData) => res.json(dbPostData))
-//     .catch((err) => {
-//       console.log(err);
-//       res.status(500).json(err);
-//     });
-// });
+//update the name of the pet and type of pet
+router.put("/:id", (req, res) => {
+  Pet.update(
+    {
+      name: req.body.name,
+      type_pet: req.body.type_pet,
+    },
+    {
+      where: {
+        id: req.params.id,
+      },
+    }
+  )
+    .then((dbPetData) => {
+      if (!dbPetData) {
+        res.status(404).json({ message: "Neo-Pet found a pet with this id" });
+        return;
+      }
+      res.json(dbPetData);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 
-// //reaction
-// router.put("/upreaction", (req, res) => {
-//   Post.upvote(req.body, { Reaction })
-//     .then((updatedPostData) => res.json(updatedPostData))
-//     .catch((err) => {
-//       console.log(err);
-//       res.status(400).json(err);
-//     });
-// });
-
-// router.put("/:id", (req, res) => {
-//   Post.update(
-//     {
-//       text: req.body.text,
-//       place: req.body.place,
-//     },
-//     {
-//       where: {
-//         id: req.params.id,
-//       },
-//     }
-//   )
-//     .then((dbPostData) => {
-//       if (!dbPostData) {
-//         res.status(404).json({ message: "Neo-Pet found a post with this id" });
-//         return;
-//       }
-//       res.json(dbPostData);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       res.status(500).json(err);
-//     });
-// });
-
-// router.delete("/:id", (req, res) => {
-//   Post.destroy({
-//     where: {
-//       id: req.params.id,
-//     },
-//   })
-//     .then((dbPostData) => {
-//       if (!dbPostData) {
-//         res.status(404).json({ message: "Neo-Pet found a post with this id" });
-//         return;
-//       }
-//       res.json(dbPostData);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       res.status(500).json(err);
-//     });
-// });
+router.delete("/:id", (req, res) => {
+  Pet.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((dbPetData) => {
+      if (!dbPetData) {
+        res.status(404).json({ message: "Neo-Pet found a pet with this id" });
+        return;
+      }
+      res.json(dbPetData);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 
 module.exports = router;

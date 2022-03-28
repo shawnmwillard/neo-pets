@@ -1,27 +1,24 @@
 const router = require("express").Router();
 const { Comment } = require("../../models");
 
-// router.get('/', (req, res) => {
-
-//     Comment.findAll({
-//         attributes: [
-//             'id',
-//             'comment_text',
-//             'user_id',
-//             'post_id',
-//             'created_at',
-//             'updated_at',
-//         ],
-//         order: [['created_at', 'DESC']],
-
-//     })
-//         .then(dbPostData => res.json(dbPostData))
-//         .catch(err => {
-//             console.log(err);
-//             res.status(500).json(err);
-//         });
-
-// });
+router.get("/", (req, res) => {
+  Comment.findAll({
+    attributes: [
+      "id",
+      "comment_text",
+      "user_id",
+      "post_id",
+      "created_at",
+      "updated_at",
+    ],
+    order: [["created_at", "DESC"]],
+  })
+    .then((dbCommentData) => res.json(dbCommentData))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 
 router.post("/", (req, res) => {
   Comment.create({
