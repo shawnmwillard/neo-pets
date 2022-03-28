@@ -1,5 +1,5 @@
 const User = require("./User");
-const Breed = require("./Breed");
+const Breed = require("./breeds");
 const Animal = require("./Animal");
 const Pet = require("./Pet");
 const Post = require("./Post");
