@@ -5,6 +5,18 @@ const path = require("path");
 const sequelize = require("./config/connection");
 const { cloudinary } = require('./config/cloudinary');
 
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+const sess = {
+  secret: 'neo-pets secret',
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+      db: sequelize
+  })
+};
+
 const app = express();
 // Handlebars templates
 const exphbs = require("express-handlebars");
