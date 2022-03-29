@@ -1,183 +1,164 @@
 * {
   box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #219ebc;
 }
 
-body,
 html {
   height: 100%;
-  padding: 0;
-  margin: 0;
-  font-family: sans-serif;
-  background-color: #195f6b;
-}
-
-a {
-  text-decoration: none;
-  color: white;
-  font-weight: normal;
-  transition: color 0.1s;
-}
-
-a:hover {
-  color: #ff9d00;
-}
-
-button {
-  background-color: white;
-  border: 0;
-  padding: 1%;
-  color: #fdc161;
-  font-weight: normal;
-  transition: background-color 0.1s;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-button:hover {
-  background-color: #ff9d00;
-}
-
-.post-list {
-  margin: 0;
-  padding: 0;
-}
-
-textarea,
-input {
-  padding: 0.5%;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-textarea:focus,
-input:focus {
-  outline: none;
-  border: 1px solid #ff9d00;
-}
-
-textarea {
-  min-width: 40%;
-  min-height: 100px;
-}
-
-form > div {
-  margin-bottom: 2%;
-}
-
-form label {
-  display: block;
-}
-
-.wrapper {
   width: 100%;
-  min-height: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
 }
 
-header {
-  border-bottom: 1px solid #ccc;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1%;
-}
-
-header h1 {
-  font-size: 1em;
-  display: flex;
-  justify-content: center;
-}
-
-main {
-  flex: 1;
-  padding: 2% 4%;
-}
-
-.btn-no-style {
-  background: none;
-  border: none;
+body {
+  box-shadow: #666;
+  margin: 50px auto;
   padding: 0;
-  cursor: pointer;
-  text-decoration: none;
+  height: 100vh;
+  width: 100vw;
+}
+
+.form-style {
   color: white;
-  font-size: 100%;
-  font-weight: bold;
-  transition: color 0.1s;
-  margin-left: 16px;
+  margin: 10px;
 }
 
-.btn-no-style:hover {
-  background: none;
-  color: #ff9d00;
+.banner {
+  background-color: #219ebc;
+  text-align: center;
+  margin: 0;
 }
 
-.delete-post-btn {
-  background-color: #d41414;
+.banner-text {
+  color: #ffb703;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 10px;
 }
 
-.delete-post-btn:hover {
-  background-color: #ff643d;
+/* style the container */
+.container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  background-color: #219ebc;
 }
 
-.post {
-  margin-bottom: 2%;
-  line-height: 150%;
+/* style inputs and link buttons */
+input {
+  background-color: #f2f2f2;
+}
+input,
+.btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  margin: 5px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none; /* remove underline from anchors */
 }
 
-.post .title span {
-  font-style: italic;
-  font-size: 90%;
-  color: #7d7d7d;
+input:hover,
+.btn:hover {
+  opacity: 1;
 }
 
-.edit-link {
-  display: block;
-  margin: -1.5% 0 2% 0;
+/* add appropriate colors to fb, twitter and google buttons */
+.fb {
+  background-color: #3B5998;
+  color: white;
 }
 
-.upvote-btn {
-  background-color: #195f6b;
-  transition: background-color 0.1s;
+.twitter {
+  background-color: #55ACEE;
+  color: white;
 }
 
-.upvote-btn:hover {
-  background-color: #418eac;
+.google {
+  background-color: #dd4b39;
+  color: white;
 }
 
-.comment-form {
-  margin-bottom: 5%;
+/* style the submit button */
+input[type=submit] {
+  background-color: #ffb703;
+  color: white;
+  cursor: pointer;
 }
 
-.comment {
-  padding: 1%;
-  margin-bottom: 1%;
+input[type=submit]:hover {
+  background-color: #fb8500;
 }
 
-.comment:nth-child(odd) {
-  background-color: #fff5eb;
+/* Two-column layout */
+.col {
+  float: left;
+  width: 50%;
+  margin: auto;
+  padding: 0 50px;
+  margin-top: 6px;
 }
 
-.comment .meta {
-  font-size: 90%;
-  margin-bottom: 0.5%;
-  opacity: 0.6;
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
-.new-post-form input {
-  width: 300px;
+/* vertical line */
+.vl {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  border: 2px solid #ddd;
+  height: 175px;
 }
 
-.edit-post-form {
-  margin-bottom: 5%;
+/* text inside the vertical line */
+/* .inner {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  padding: 8px 10px;
+} */
+
+/* hide some text on medium and large screens */
+.hide-md-lg {
+  display: none;
+}
+
+/* bottom container */
+.bottom-container {
+  text-align: center;
+  color: #666;
 }
 
 footer {
-  border-top: 1px solid #ccc;
-  display: flex;
-  justify-content: center;
-  padding: 1%;
-  font-size: 110%;
+  background-color: #219ebc;
+
+}
+
+/* Responsive layout - when the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 650px) {
+  .col {
+    width: 100%;
+    margin-top: 0;
+  }
+  /* hide the vertical line */
+  .vl {
+    display: none;
+  }
+  /* show the hidden text on small screens */
+  .hide-md-lg {
+    display: block;
+    text-align: center;
+  }
 }
