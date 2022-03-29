@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
     <title>Neo-Pets</title>
 </head>
 <body>
@@ -13,18 +13,44 @@
             <h1>
                 <a href="/">Neo-Pets</a>
             </h1>
-            <nav>
-                {{#if loggedIn}}
-                <button id="logout" class="">logout</button>
-                {{else}}
-                <a href="/login">login</a>
-                {{/if}}
-            </nav>
         </header>
         <main>
             {{{ body }}}
-        </main>
-        <footer>Thanks for sharing your pets!</footer>
+    <form class="login-form">
+        <div>
+            <label for="email-login">email:</label>
+            <input type="text" id="email-login" />
+        </div>
+        <div>
+            <label for="password-login">password:</label>
+            <input type="password" id="password-login" />
+        </div>
+        <div>
+            <button type="submit">login</button>
+        </div>
+    </form>
+
+    <form class="sign-up">
+        <div>
+            <label for="username-signup">email:</label>
+            <input type="text" id="username-signup" />
+        </div>
+        <div>
+            <label for="email-signup">email:</label>
+            <input type="text" id="email-signup" />
+        </div>
+        <div>
+            <label for="password-signup">password:</label>
+            <input type="password" id="password-signup" />
+        </div>
+        <div>
+            <button type="Submit">signup</button>
+        </div>
+    </form>
+
+    <script src="/javascript/login.js"></script>
+    </main>
+    <footer>Thanks for sharing your pets!</footer>
     </div>
     {{#if loggedIn}}
         <script src="/javascript/logout.js"></script>
