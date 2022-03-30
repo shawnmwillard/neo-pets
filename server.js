@@ -3,9 +3,7 @@ const express = require("express");
 const routes = require("./controllers");
 const path = require("path");
 const sequelize = require("./config/connection");
-const { cloudinary } = require('./config/cloudinary');
-
-
+const { cloudinary } = require("./config/cloudinary");
 
 const app = express();
 // Handlebars templates
@@ -22,6 +20,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(routes);
 
-sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log("Now listening"));
-});
+//sequelize.sync({ force: false }).then(() => {
+app.listen(PORT, () => console.log("Now listening"));
+//});
+
+// sequelize.sync({ force: true }).then(() => {
+//   app.listen(PORT, () => console.log("Now Listening"));
+// });
