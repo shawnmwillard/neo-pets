@@ -34,7 +34,10 @@ router.get("/", (req, res) => {
       },
     ],
   })
-    .then((dbPostData) => res.json(dbPostData))
+    .then(dbPostData => {
+      console.log(dbPostData[0]);
+      res.render('homepage', dbPostData[0].get({ plain: true }));
+    })
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);

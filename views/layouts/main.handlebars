@@ -1,33 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+
     <title>Neo-Pets</title>
 </head>
+
 <body>
-    <div>
+    <div class="page">
         <header>
-            <h1>
-                <a href="/">Neo-Pets</a>
+            <h1 class="banner">
+                <a class="banner-text" href="/">Neo-Pets</a>
             </h1>
-            <nav>
-                {{#if loggedIn}}
-                <button id="logout" class="">logout</button>
-                {{else}}
-                <a href="/login">login</a>
-                {{/if}}
-            </nav>
         </header>
-        <main>
-            {{{ body }}}
-        </main>
-        <footer>Thanks for sharing your pets!</footer>
     </div>
-    {{#if loggedIn}}
-        <script src="/javascript/logout.js"></script>
-    {{/if}}
+    <main>
+        {{{body}}}
+    </main>
+
+    <script src="/javascript/login.js"></script>
+
 </body>
+
 </html>

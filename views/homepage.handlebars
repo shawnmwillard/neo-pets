@@ -1,7 +1,31 @@
-<ol class="post-list">
-    {{#each posts as |post|}}
-    <li>
-        {{> post-info post }}
-    </li>
-    {{/each}}
-</ol>
+{{!-- <ol class="post-list">
+  <li>
+    <article class="post">
+      <div class="title">
+        <a href="{{post_url}}" target="_blank">{{title}}</a>
+        <span>({{post_url}})</span>
+      </div>
+      <div class="meta">
+        {{vote_count}} point(s) by {{user.username}} on
+        {{created_at}}
+        |
+        <a href="/post/{{id}}">{{comments.length}} comment(s)</a>
+      </div>
+    </article>
+  </li>
+</ol> --}}
+
+{{#each posts}}
+<div class="card">
+
+  <div class="card-header">
+    Pet Owner: {{user.first_name}}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{text}}</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <input type="submit" class="btn btn-primary" value="Location">
+  </div>
+</div>
+<br>
+{{/each}}
