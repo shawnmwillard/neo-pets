@@ -23,7 +23,15 @@
   </div>
   <div class="card-body">
     <h5 class="card-title">{{text}}</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    {{#if place}}
+    {{!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
+    <!-- Adding valition to display picture -->
+    <p class="card-text">{{place}}</p>
+    {{/if}}
+    {{#if avatar}}
+    {{!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
+    <img class="img-thumbnail" src={{avatar}}>
+    {{/if}}
     <input type="submit" class="btn btn-primary" value="Location">
   </div>
 </div>

@@ -10,6 +10,7 @@ router.get("/", (req, res) => {
       "text",
       "user_id",
       "place",
+      "avatar",
       "created_at",
       [
         sequelize.literal(
@@ -45,12 +46,12 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get('/login', (req, res) => {
-  res.render('login');
-})
+router.get("/login", (req, res) => {
+  res.render("login");
+});
 
-router.get('/signup', (req, res) => {
-  res.render('login');
-})
+router.get("/signup", (req, res) => {
+  res.render("login");
+});
 
 module.exports = router;

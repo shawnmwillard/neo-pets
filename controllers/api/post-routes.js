@@ -2,6 +2,9 @@ const router = require("express").Router();
 const { Post, User, Reaction, Comment } = require("../../models");
 const sequelize = require("../../config/connection");
 
+const { cloudinary } = require("../../config/cloudinary");
+const upload = require("../../utils/multer");
+
 router.get("/", (req, res) => {
   Post.findAll({
     order: [["created_at", "DESC"]],
@@ -34,10 +37,7 @@ router.get("/", (req, res) => {
       },
     ],
   })
-    .then(dbPostData => {
-      console.log(dbPostData[0]);
-      res.render('homepage', dbPostData[0].get({ plain: true }));
-    })
+    .then((dbPostData) => res.json(dbPostData))
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
@@ -54,6 +54,7 @@ router.get("/:id", (req, res) => {
       "text",
       "user_id",
       "place",
+      "avatar",
       "created_at",
       [
         sequelize.literal(
@@ -91,18 +92,58 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {
-  Post.create({
-    text: req.body.text,
-    user_id: req.body.user_id,
-    is_contest: req.body.is_contest,
-    place: req.body.place,
-  })
-    .then((dbPostData) => res.json(dbPostData))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+// router.post("/", (req, res) => {
+//   Post.create({
+//     text: req.body.text,
+//     user_id: req.body.user_id,
+//     is_contest: req.body.is_contest,
+//     place: req.body.place,
+//   })
+//     .then((dbPostData) => res.json(dbPostData))
+//     .catch((err) => {
+//       console.log(err);
+//       res.status(500).json(err);
+//     });
+// });
+
+router.post("/", upload.single("image"), async (req, res) => {
+  try {
+    // Upload image to cloudinary
+    console.log(req.file.path);
+    console.log(cloudinary);
+    const result = await cloudinary.uploader.upload(req.file.path);
+    //const result = await cloudinary.uploader(req.file.path);
+    // cloudinary.v2.uploader.upload(req.file.path, function (error, result) {
+    //   console.log(result, error);
+    // });
+    // Create new user
+
+    // let user = new User({
+    //   name: req.body.name,
+    //   avatar: result.secure_url,
+    //   cloudinary_id: result.public_id,
+    // });
+    // // Save user
+    // await user.save();
+    // res.json(user);
+    Post.create({
+      text: req.body.text,
+      user_id: req.body.user_id,
+      is_contest: req.body.is_contest,
+      place: req.body.place,
+
+      name: req.body.name,
+      avatar: result.secure_url,
+      cloudinary_id: result.public_id,
+    })
+      .then((dbPostData) => res.json(dbPostData))
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 //reaction
