@@ -1,4 +1,3 @@
-
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
@@ -54,8 +53,17 @@ Post.init(
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
-    image: {
-      type: DataTypes.BLOB,
+    // image: {
+    //   type: DataTypes.STRING,
+    // },
+    name: {
+      type: DataTypes.STRING,
+    },
+    avatar: {
+      type: DataTypes.STRING,
+    },
+    cloudinary_id: {
+      type: DataTypes.STRING,
     },
     place: {
       type: DataTypes.STRING,

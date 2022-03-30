@@ -16,6 +16,12 @@ body {
   height: 100vh;
   width: 100vw;
 }
+/*fit images*/
+img {
+  width: 400px;
+  height: 400px;
+  object-fit: scale-down;
+}
 
 .card {
   border: solid 5px #023047;
@@ -85,12 +91,12 @@ input:hover,
 
 /* add appropriate colors to fb, twitter and google buttons */
 .fb {
-  background-color: #3B5998;
+  background-color: #3b5998;
   color: white;
 }
 
 .twitter {
-  background-color: #55ACEE;
+  background-color: #55acee;
   color: white;
 }
 
@@ -100,13 +106,13 @@ input:hover,
 }
 
 /* style the submit button */
-input[type=submit] {
+input[type="submit"] {
   background-color: #ffb703;
   color: white;
   cursor: pointer;
 }
 
-input[type=submit]:hover {
+input[type="submit"]:hover {
   background-color: #fb8500;
 }
 
@@ -159,7 +165,6 @@ input[type=submit]:hover {
 
 footer {
   background-color: #219ebc;
-
 }
 
 /* Responsive layout - when the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other */
