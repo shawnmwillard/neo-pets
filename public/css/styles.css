@@ -23,6 +23,16 @@ img {
   object-fit: scale-down;
 }
 
+.login {
+  font-size: large;
+  text-align: right;
+  text-decoration: none;
+  display: inline-flex;
+  margin: auto 30px;
+  padding-bottom: 30px;
+  color: #ffb703;
+}
+
 .card {
   border: solid 5px #023047;
   margin: 30px;
@@ -49,12 +59,14 @@ img {
   text-decoration: none;
   font-family: Arial, Helvetica, sans-serif;
   padding: 10px;
+  display: inline-block;
+  justify-content: center;
 }
 
 .login {
-  display: flex;
+  display: inline-block;
   justify-content: right;
-  align-items: flex-end;
+  margin-left: 500px;
 }
 
 /* style the container */
