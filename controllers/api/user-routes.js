@@ -70,7 +70,7 @@ router.post("/", (req, res) => {
     last_name: req.body.last_name,
     country: req.body.country,
   })
-    .then(dbUserData => {
+    .then((dbUserData) => {
       req.session.save(() => {
         req.session.user_id = dbUserData.id;
         req.session.username = dbUserData.username;
@@ -85,6 +85,59 @@ router.post("/", (req, res) => {
     });
 });
 
+router.post("/login", (req, res) => {
+  console.log(req.body.email);
+  User.findOne({
+    where: {
+      email: req.body.email,
+    },
+  }).then((dbUserData) => {
+    if (!dbUserData) {
+      res.status(400).json({ message: "No user with that email address!" });
+      return;
+    }
+    console.log("--------------------");
+    console.log(dbUserData);
+    const validPassword = dbUserData.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      res.status(400).json({ message: "Incorrect password!" });
+      return;
+    }
+    console.log("--------------------");
+    console.log(req.session.user_id);
+    req.session.save(() => {
+      req.session.user_id = dbUserData.id;
+      req.session.username = dbUserData.username;
+      req.session.loggedIn = true;
+
+      res.json({ user: dbUserData, message: "You are now logged in!" });
+    });
+    // .catch((err) => {
+    //   console.log(err);
+    //   res.status(500).json(err);
+    // });
+  });
+
+  //   const validPassword = dbUserData.checkPassword(req.body.password);
+  //   if (!validPassword) {
+  //     res.status(400).json({ message: "Incorrect password!" });
+  //     return;
+  //   }
+  //   console.log(req.session);
+  //   req.session.save(() => {
+  //     req.session.user_id = dbUserData.id;
+  //     req.session.username = dbUserData.username;
+  //     req.session.loggedIn = true;
+
+  //     res.json({ user: dbUserData, message: "You are now logged in!" });
+  //   });
+  //   // .catch((err) => {
+  //   //   console.log(err);
+  //   //   res.status(500).json(err);
+  //   // });
+  // });
+});
 // PUT  by ID
 router.put("/:id", (req, res) => {
   User.update(req.body, {
@@ -125,37 +178,6 @@ router.delete("/:id", (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
-});
-
-router.post("/login", (req, res) => {
-  User.findOne({
-    where: {
-      email: req.body.email,
-    },
-  }).then((dbUserData) => {
-    if (!dbUserData) {
-      res.status(400).json({ message: "No user with that email address!" });
-      return;
-    }
-
-    const validPassword = dbUserData.checkPassword(req.body.password);
-    if (!validPassword) {
-      res.status(400).json({ message: "Incorrect password!" });
-      return;
-    }
-    console.log(req.session);
-    req.session.save(() => {
-      req.session.user_id = dbUserData.id;
-      req.session.username = dbUserData.username;
-      req.session.loggedIn = true;
-
-      res.json({ user: dbUserData, message: 'You are now logged in!' });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-  });
 });
 
 module.exports = router;
