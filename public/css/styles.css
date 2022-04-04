@@ -37,6 +37,12 @@ img {
   border: solid 5px #023047;
   margin: 30px;
   padding: 10px;
+  height: 350px;
+}
+
+.comment-text {
+  width: 100%;
+  height: 100px;
 }
 
 .card-header {

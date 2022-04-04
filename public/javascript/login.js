@@ -15,6 +15,7 @@ async function loginFormHandler(event) {
     });
 
     if (response.ok) {
+      sessionStorage.setItem("userId", response.json().id || "1");
       document.location.replace("/");
     } else {
       alert(response.statusText);
