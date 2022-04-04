@@ -1,0 +1,83 @@
+<section>
+    <h2>Create New Post</h2>
+
+    <!--<form class="new-post-form">
+        <div>
+            <label for="post-text">Text</label>
+            <input type="text" id="post-text" name="post-text" />
+        </div>
+        <div>
+            <label for="post-place">Place</label>
+            <input id="post-place" name="post-place" />
+        </div>
+        <small id="fileHelpId" class="form-text text-muted">Please select the image to be uploaded...</small>
+        <button type="submit" class="btn" value="Upload">Image</button>
+
+        <div class="btn">
+            <label for="file">Upload Image</label>
+            <input type="file" name="image" id="">
+        </div>
+        <div>
+            <label for="image">Image</label>
+            <input type="file" name="image" id="image">
+        </div>
+
+
+        <button type="submit" class="btn">Create</button>
+    </form>-->
+
+    <form action="/api/posts" method="post" enctype="multipart/form-data" class="new-post-form">
+        <div>
+            <label for="post-text">Text</label>
+            <input type="text" id="text" name="text" />
+        </div>
+        <div>
+            <label for="post-place">Place</label>
+            <input id="place" name="place" />
+        </div>
+        <small id="fileHelpId" class="form-text text-muted">Please select the image to be uploaded...</small>
+
+
+        <div>
+            <label for="image">Image</label>
+            <input type="file" name="image" id="image">
+        </div>
+
+
+        <button type="submit" class="btn">Create</button>
+    </form>
+
+    {{!-- <div class="container">
+        <h1>File Upload</h1>
+        <form id='form'>
+            <div class="input-group">
+                <label for='name'>Your name</label>
+                <input name='name' id='name' placeholder="Enter your name" />
+            </div>
+            <div class="input-group">
+                <label for='files'>Select files</label>
+                <input id='files' type="file" multiple>
+            </div>
+            <button class="submit-btn" type='submit'>Upload</button>
+        </form>
+    </div>
+
+</section> --}}
+
+<!--
+{{#if posts.length}}
+<section>
+    <h2>Your Posts</h2>
+    <ol>
+        {{#each posts as |post|}}
+        <li>
+            {{> post-info post}}
+            <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
+        </li>
+        {{/each}}
+    </ol>
+</section>
+{{/if}} -->
+
+{{!--
+<script src="/javascript/add-post.js"></script> --}}
