@@ -107,42 +107,66 @@ router.get("/:id", (req, res) => {
 // });
 
 router.post("/", upload.single("image"), async (req, res) => {
-  try {
-    // Upload image to cloudinary
-    console.log(req.file.path);
-    console.log(cloudinary);
-    const result = await cloudinary.uploader.upload(req.file.path);
-    //const result = await cloudinary.uploader(req.file.path);
-    // cloudinary.v2.uploader.upload(req.file.path, function (error, result) {
-    //   console.log(result, error);
-    // });
-    // Create new user
-
-    // let user = new User({
-    //   name: req.body.name,
-    //   avatar: result.secure_url,
-    //   cloudinary_id: result.public_id,
-    // });
-    // // Save user
-    // await user.save();
-    // res.json(user);
+  // Upload image to cloudinary
+  console.log("-----------------");
+  if (!req.file) {
+    console.log("No picture upload");
     Post.create({
       text: req.body.text,
       user_id: req.body.user_id,
       is_contest: req.body.is_contest,
       place: req.body.place,
-
-      name: req.body.name,
-      avatar: result.secure_url,
-      cloudinary_id: result.public_id,
     })
       .then((dbPostData) => res.json(dbPostData))
       .catch((err) => {
         console.log(err);
         res.status(500).json(err);
       });
-  } catch (err) {
-    console.log(err);
+  } else {
+    try {
+      const result = await cloudinary.uploader.upload(req.file.path);
+      //console.log(req.file.path);
+      //console.log(cloudinary);
+
+      //const result = await cloudinary.uploader(req.file.path);
+      // cloudinary.v2.uploader.upload(req.file.path, function (error, result) {
+      //   console.log(result, error);
+      // });
+      // Create new user
+
+      // let user = new User({
+      //   name: req.body.name,
+      //   avatar: result.secure_url,
+      //   cloudinary_id: result.public_id,
+      // });
+      // // Save user
+      // await user.save();
+      // res.json(user);
+      Post.create({
+        text: req.body.text,
+        user_id: req.body.user_id,
+        is_contest: req.body.is_contest,
+        place: req.body.place,
+
+        name: req.body.name,
+        avatar: result.secure_url,
+        cloudinary_id: result.public_id,
+      })
+        //.then((dbPostData) => res.render("dashboard", { dbPostData }))
+        .then((dbPostData) => {
+          const post = dbPostData.get({ plain: true });
+          console.log(post);
+          return;
+          res.render("single-post", { post });
+        })
+        //.then((dbPostData) => res.json(dbPostData))
+        .catch((err) => {
+          console.log(err);
+          res.status(500).json(err);
+        });
+    } catch (err) {
+      console.log(err);
+    }
   }
 });
 
