@@ -1,33 +1,23 @@
-
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 const { truncate } = require("./user");
 
-class Vote extends Model {}
-
-Vote.init(
-
+class Reactionsetup extends Model {}
+//table setup of the reaction and adding points
+Reactionsetup.init(
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    user_id: {
-      type: DataTypes.INTEGER,
+    text: {
+      type: DataTypes.STRING,
       allowNull: false,
-      references: {
-        model: "user",
-        key: "id",
-      },
     },
-    post_id: {
+    points: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: "post",
-        key: "id",
-      },
     },
   },
   {
@@ -35,7 +25,7 @@ Vote.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "vote",
+    modelName: "reactionsetup",
   }
 );
-module.exports = Vote;
+module.exports = Reactionsetup;

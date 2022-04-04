@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+
+    <title>Neo-Pets</title>
+
+</head>
+
+<body>
+
+    <div class="card">
+
+        <div class="card-header">
+            Pet Owner: {{post.user.first_name}}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{post.text}}</h5>
+            {{#if post.place}}
+            {{!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
+            <!-- Adding valition to display picture -->
+            <p class="card-text">{{post.place}}</p>
+            {{/if}}
+            {{#if post.avatar}}
+            {{!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
+            <img class="img-thumbnail" src={{post.avatar}}>
+            {{/if}}
+            <input type="submit" class="btn btn-primary" value="Location">
+        </div>
+    </div>
+    {{#if loggedIn}}
+    <script src="/javascript/comment.js"></script>
+    <script src="/javascript/upvote.js"></script>
+    {{/if}}
+
+</body>
+
+</html>

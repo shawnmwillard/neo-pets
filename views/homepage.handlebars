@@ -1,0 +1,52 @@
+{{!-- <ol class="post-list">
+  <li>
+    <article class="post">
+      <div class="title">
+        <a href="{{post_url}}" target="_blank">{{title}}</a>
+        <span>({{post_url}})</span>
+      </div>
+      <div class="meta">
+        {{vote_count}} point(s) by {{user.username}} on
+        {{created_at}}
+        |
+        <a href="/post/{{id}}">{{comments.length}} comment(s)</a>
+      </div>
+    </article>
+  </li>
+</ol> --}}
+
+{{#each posts}}
+<div class="card" >
+
+  <div class="card-header">
+    Pet Owner: {{user.first_name}}
+    
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{text}}</h5>
+    {{#if place}}
+    {{!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
+    <!-- Adding valition to display picture -->
+    <p class="card-text">{{place}}</p>
+    {{/if}}
+    {{#if avatar}}
+    {{!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
+    <img class="img-thumbnail" src={{avatar}}>
+    {{/if}}
+    <input type="submit" class="btn btn-primary" value="Location">
+    {{!-- <input type="text" value="" placeholder="Add Comment"> --}}
+    {{!-- <textarea name="comment-body" placeholder="Add Comment"></textarea>
+    <button class="comment-submit">Comment</button> --}}
+
+
+    <form class="comment" postId={{id}}>
+
+    <textarea name="comment-body" placeholder="Add Comment" class="comment-text"></textarea>
+            <input id={{id}} type="submit" value="Comment">
+
+    </form>
+  </div>
+</div>
+<br>
+{{/each}}
+<script src="/javascript/comment.js"></script>
