@@ -16,7 +16,11 @@
         <header>
             <h1 class="banner">
                 <a class="banner-text" href="/">Neo-Pets</a>
+                {{#if loggedIn}}
+                <a class="login">logout</a>
+                {{else}}
                 <a href="/login" class="login">login</a>
+                {{/if}}
             </h1>
         </header>
     </div>
