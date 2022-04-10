@@ -1,12 +1,12 @@
 const router = require("express").Router();
-const { Animal, Breed } = require("../../models");
+const { animal, Breed } = require("../../models");
 
 router.get("/", (req, res) => {
   Breed.findAll({
     order: [["id", "ASC"]],
     include: [
       {
-        model: Animal,
+        model: animal,
         attributes: ["id", "description"],
       },
     ],
@@ -25,7 +25,7 @@ router.get("/:id", (req, res) => {
     },
     include: [
       {
-        model: Animal,
+        model: animal,
         attributes: ["id", "description"],
       },
     ],

@@ -83,7 +83,7 @@ Post.hasMany(Comment, {
 //add reaction setup
 module.exports = {
   User,
-  Animal,
+  animal,
   Breed,
   Pet,
   Post,
