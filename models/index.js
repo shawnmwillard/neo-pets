@@ -1,6 +1,6 @@
 const User = require("./User");
 const Breed = require("./breeds");
-const Animal = require("./Animal");
+const animal = require("./animal");
 const Pet = require("./Pet");
 const Post = require("./Post");
 const Comment = require("./Comment");
@@ -8,11 +8,11 @@ const Vote = require("./Vote");
 const Reaction = require("./Reaction");
 const Reactionsetup = require("./Reactionsetup");
 
-Animal.hasMany(Breed, {
+animal.hasMany(Breed, {
   foreignKey: "animal_id",
 });
 
-Breed.belongsTo(Animal, {
+Breed.belongsTo(animal, {
   foreignKey: "animal_id",
 });
 
